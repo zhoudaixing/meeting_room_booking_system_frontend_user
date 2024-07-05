@@ -1,5 +1,6 @@
 import axios from "axios";
 import { RegisterUser } from "../page/register/Register";
+import { UpdatePassword } from "../page/update_password/UpdatePassword";
 
 const axiosInstance = axios.create({
   baseURL: "http://124.221.139.111:3000/",
@@ -32,4 +33,16 @@ export async function registerCaptcha(email: string) {
 
 export async function register(registerUser: RegisterUser) {
   return await axiosInstance.post("/user/register", registerUser);
+}
+
+export async function updatePasswordCaptcha(email: string) {
+  return await axiosInstance.get("/user/update-password/captcha", {
+    params: {
+      address: email,
+    },
+  });
+}
+
+export async function updatePassword(data: UpdatePassword) {
+  return await axiosInstance.post("/user/update-password", data);
 }
